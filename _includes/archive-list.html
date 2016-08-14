@@ -1,0 +1,39 @@
+<p>
+	<a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a><br/>
+	<span class="archive-excerpt">{{ post.excerpt | strip_html | truncatewords:15 }}</span><br/>
+	<span class="archive-meta">
+		{% if post.date %}
+			<i class="fa fa-clock-o"></i> {{ post.date | date: "%B %d, %Y" }}
+		{% endif %}
+		{% if page.categories %}
+			{% assign cat_exists = false %}
+			{% assign subcat_exists = false %}
+		
+			{% capture category_url %}/{{ page.categories | first }}/{% endcapture %}
+			{% capture subcategory_url %}/{{ page.categories | first }}/{{ page.subcategory }}/{% endcapture %}
+			{% for page in site.html_pages %}
+				{% if page.url == category_url %}
+					{% assign cat_exists = true %}
+				{% endif %}
+				{% if page.url == subcategory_url %}
+					{% assign subcat_exists = true %}
+				{% endif %}
+			{% endfor %}
+		
+			<i class="fa fa-folder-open"></i>&nbsp;
+			{% if cat_exists %}<a href="{{ site.url }}/{{ page.categories | first }}/" itemprop="url">{% endif %}
+				{{ page.categories | array_to_sentence_string }}
+			{% if cat_exists %}</a>{% endif %}
+			
+			{% if page.subcategory %} 
+				&nbsp;<i class="fa fa-long-arrow-right"></i>
+				{% if subcat_exists %}<a href="{{ site.url }}/{{ page.categories | first }}/{{ page.subcategory }}/" itemprop="url">{% endif %}
+					{{ page.subcategory }}
+				{% if subcat_exists %}</a>{% endif %}
+			{% endif %}
+		{% endif %}
+		{% if page.tags %}
+			<i class="fa fa-tags"></i> {{ page.tags | array_to_sentence_string }}
+		{% endif %}
+	</span>
+</p>

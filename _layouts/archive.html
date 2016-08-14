@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+<div id="main" role="main">
+	<div class="wrap">
+		{% if page.image.feature %}
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="{{ site.url }}/images/{{ page.image.feature }}" class="page-feature-image" alt="{{ page.title }}">
+				{% if page.image.credit %}{% include image-credit.html %}{% endif %}
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		{% endif %}
+		<div class="page-title">
+			<h1>{{ page.title }}</h1>
+		</div>
+		<div class="archive-wrap">
+			<div class="page-content">
+				{{ content }}
+			</div><!-- /.page-content -->
+			{% if page.modified or page.date %}
+			<div class="page-meta">
+				<em>
+				{% if page.modified %}
+					Last updated <time datetime="{{ page.modified | date: "%Y-%m-%dT%H:%M:%SZ" }}" itemprop="dateModified">{{ page.modified | date: "%B %d, %Y" }}</time>.
+				{% else %}
+					Posted <time datetime="{{ page.date | date: "%Y-%m-%dT%H:%M:%SZ" }}" itemprop="datePublished">{{ page.date | date: "%B %d, %Y" }}</time>.
+				{% endif %}
+				</em>
+			</div>
+			{% endif %}
+		</div class="archive-wrap"><!-- /.archive-wrap -->
+	</div><!-- /.wrap -->
+</div><!-- /#main -->

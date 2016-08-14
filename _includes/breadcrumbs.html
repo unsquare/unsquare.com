@@ -1,0 +1,34 @@
+{% if page.categories and page.categories != empty %}
+
+{% capture category_url %}/{{ page.categories | first }}/{% endcapture %}
+{% capture subcategory_url %}/{{ page.categories | first }}/{{ page.subcategory }}/{% endcapture %}
+{% for page in site.html_pages %}
+	{% if page.url == category_url %}
+		{% assign cat_exists = true %}
+	{% endif %}
+	{% if page.url == subcategory_url %}
+		{% assign subcat_exists = true %}
+	{% endif %}
+{% endfor %}
+
+  <nav class="breadcrumbs">
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="{{ site.url }}" itemprop="url">
+        <span itemprop="title">Home</span>
+      </a> > 
+    </span>
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      {% if cat_exists %}<a href="{{ site.url }}/{{ page.categories | first }}/" itemprop="url">{% endif %}
+        <span itemprop="title">{{ page.categories | first | replace: '-',' ' | capitalize }}</span>
+      {% if cat_exists %}</a>{% endif %}
+    </span>
+{% if page.subcategory != empty %}
+     > 
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      {% if subcat_exists %}<a href="{{ site.url }}/{{ page.categories | first }}/{{ page.subcategory }}/" itemprop="url">{% endif %}
+        <span itemprop="title">{{ page.subcategory | capitalize }}</span>
+      {% if subcat_exists %}</a>{% endif %}
+    </span>
+{% endif %}   
+  </nav><!-- /.breadcrumbs -->
+{% endif %}

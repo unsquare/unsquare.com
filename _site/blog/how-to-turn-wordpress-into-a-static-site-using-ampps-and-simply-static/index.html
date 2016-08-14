@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jeff James – How to Turn Wordpress Into a Static Site Using AMPPS and Simply Static</title>
+    <meta name="description" content="After much tinkering, I finally figured out how to make a decent static backup of my old Wordpress site. I kept running into problems no matter my approach - whether I tried the web interface or wget - but I had a brainstorm recently that solved a lot of my issues.
+
+The main problem with trying to create a backup in the Wordpress web interface is that my site is on shared hosting and Wordpress is a resource hog. It’s one of the reasons I wanted to switch to Jekyll in the first place. I’m unlikely to ever be able to afford dedicated hosting, so switching to a static site was definitely an economic choice.
+
+It’s also just a matter of impatience. If you try to do anything involved in Wordpress on shared hosting, you’ll probably hit the upper limit of your server’s memory and your site will crap out.
+
+That’s what happened every time I tried to generate a static copy of my site with a plugin called Simply Static. The plugin would load for a few long minutes and then return an error message.
+
+As for wget, it might just be too convoluted for my purposes. I could never quite figure out the right combination of options to download my site without also downloading a bunch of unnecessary garbage. It was also a pretty slow process. Whenever I inevitably realized halfway through that I’d included the wrong options, it meant I had to start over from the beginning.
+
+My brainstorm was when I realizes that I could use AMPPS (or MAMP, if you prefer) to create my own dedicated server. See, I really only need the server for as long as it takes to spit out a static copy, so it would be absurd to pay for hosting.
+
+">
+    <meta name="keywords" content="Wordpress, Jekyll, AMPPS, MAMP, static site, shared hosting, dedicated server">
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="How to Turn Wordpress Into a Static Site Using AMPPS and Simply Static">
+	<meta name="twitter:description" content="After much tinkering, I finally figured out how to make a decent static backup of my old Wordpress site. I kept running into problems no matter my approach - whether I tried the web interface or wget - but I had a brainstorm recently that solved a lot of my issues.
+
+The main problem with trying to create a backup in the Wordpress web interface is that my site is on shared hosting and Wordpress is a resource hog. It’s one of the reasons I wanted to switch to Jekyll in the first place. I’m unlikely to ever be able to afford dedicated hosting, so switching to a static site was definitely an economic choice.
+
+It’s also just a matter of impatience. If you try to do anything involved in Wordpress on shared hosting, you’ll probably hit the upper limit of your server’s memory and your site will crap out.
+
+That’s what happened every time I tried to generate a static copy of my site with a plugin called Simply Static. The plugin would load for a few long minutes and then return an error message.
+
+As for wget, it might just be too convoluted for my purposes. I could never quite figure out the right combination of options to download my site without also downloading a bunch of unnecessary garbage. It was also a pretty slow process. Whenever I inevitably realized halfway through that I’d included the wrong options, it meant I had to start over from the beginning.
+
+My brainstorm was when I realizes that I could use AMPPS (or MAMP, if you prefer) to create my own dedicated server. See, I really only need the server for as long as it takes to spit out a static copy, so it would be absurd to pay for hosting.
+
+">
+	<meta name="twitter:site" content="@unsquare">
+	<meta name="twitter:creator" content="@unsquare">
+	
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://unsquare.com/images/coding-feature.jpg">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="How to Turn Wordpress Into a Static Site Using AMPPS and Simply Static">
+	<meta property="og:description" content="After much tinkering, I finally figured out how to make a decent static backup of my old Wordpress site. I kept running into problems no matter my approach - whether I tried the web interface or wget - but I had a brainstorm recently that solved a lot of my issues.
+
+The main problem with trying to create a backup in the Wordpress web interface is that my site is on shared hosting and Wordpress is a resource hog. It’s one of the reasons I wanted to switch to Jekyll in the first place. I’m unlikely to ever be able to afford dedicated hosting, so switching to a static site was definitely an economic choice.
+
+It’s also just a matter of impatience. If you try to do anything involved in Wordpress on shared hosting, you’ll probably hit the upper limit of your server’s memory and your site will crap out.
+
+That’s what happened every time I tried to generate a static copy of my site with a plugin called Simply Static. The plugin would load for a few long minutes and then return an error message.
+
+As for wget, it might just be too convoluted for my purposes. I could never quite figure out the right combination of options to download my site without also downloading a bunch of unnecessary garbage. It was also a pretty slow process. Whenever I inevitably realized halfway through that I’d included the wrong options, it meant I had to start over from the beginning.
+
+My brainstorm was when I realizes that I could use AMPPS (or MAMP, if you prefer) to create my own dedicated server. See, I really only need the server for as long as it takes to spit out a static copy, so it would be absurd to pay for hosting.
+
+">
+	<meta property="og:url" content="http://unsquare.com/blog/how-to-turn-wordpress-into-a-static-site-using-ampps-and-simply-static/">
+	<meta property="og:site_name" content="Jeff James">
+
+    <link rel="canonical" href="http://unsquare.com/blog/how-to-turn-wordpress-into-a-static-site-using-ampps-and-simply-static/">
+
+    <link href="http://unsquare.com/atom.xml" type="application/atom+xml" rel="alternate" title="Jeff James Atom Feed">
+    <link href="http://unsquare.com/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+    <link rel="amphtml" href="http://mercury.postlight.com/amp?url=http://unsquare.com/blog/how-to-turn-wordpress-into-a-static-site-using-ampps-and-simply-static/">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="stylesheet" href="http://unsquare.com/css/main.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="http://unsquare.com/js/vendor/html5shiv.min.js"></script>
+      <script src="http://unsquare.com/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body id="js-body">
+    <!--[if lt IE 9]><div class="upgrade notice-warning"><strong>Your browser is quite old!</strong> Why not <a href="http://whatbrowser.org/">upgrade to a newer one</a> to better enjoy this site?</div><![endif]-->
+
+    <header id="masthead">
+  <div class="inner-wrap">
+    <a href="http://unsquare.com/" class="site-title">Jeff James</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">Jeff James</a></li>
+	
+    
+    <li><a href="http://unsquare.com/blog/" >Blog</a></li>
+  
+    
+    <li><a href="http://unsquare.com/writing/" >Writing</a></li>
+  
+    
+    <li><a href="http://unsquare.com/archive/" >Archive</a></li>
+  
+    
+    <li><a href="http://unsquare.com/contact/" >Contact</a></li>
+  
+</ul>
+    </nav>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+    <nav role="navigation" id="js-menu" class="sliding-menu-content">
+  <h5>Jeff James <span>Table of Contents</span></h5>
+  <ul class="menu-item">
+    <li>
+      <a href="http://unsquare.com/blog/">
+        <img src="http://unsquare.com/images/blog.jpg" alt="teaser" class="teaser">
+        <div class="title">Blog</div>
+        <p class="excerpt">Sometimes I turn my thoughts into words.</p>
+      </a>
+    </li><li>
+      <a href="http://unsquare.com/writing/">
+        <img src="http://unsquare.com/images/writing.jpg" alt="teaser" class="teaser">
+        <div class="title">Writing</div>
+        <p class="excerpt">Writing of all kinds.</p>
+      </a>
+    </li><li>
+      <a href="http://unsquare.com/archive/">
+        <img src="http://unsquare.com/images/archive.jpg" alt="teaser" class="teaser">
+        <div class="title">Archive</div>
+        <p class="excerpt">Everything I've posted here.</p>
+      </a>
+    </li><li>
+      <a href="http://unsquare.com/contact/">
+        <img src="http://unsquare.com/images/contact.jpg" alt="teaser" class="teaser">
+        <div class="title">Contact</div>
+        <p class="excerpt">Tell me what you have to say.</p>
+      </a>
+    </li>
+  </ul>
+</nav>
+<button type="button" id="js-menu-trigger" class="sliding-menu-button lines-button x2" role="button" aria-label="Toggle Navigation">
+  <span class="nav-lines"></span>
+</button>
+
+<div id="js-menu-screen" class="menu-screen"></div>
+
+
+    <div id="page-wrapper">
+      <div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="http://unsquare.com/images/coding-feature.jpg" class="page-feature-image" alt="How to Turn Wordpress Into a Static Site Using AMPPS and Simply Static" itemprop="image">
+				
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		
+		
+
+
+
+
+
+  <nav class="breadcrumbs">
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="http://unsquare.com" itemprop="url">
+        <span itemprop="title">Home</span>
+      </a> > 
+    </span>
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="http://unsquare.com/blog/" itemprop="url">
+        <span itemprop="title">Blog</span>
+      </a>
+    </span>
+
+     > 
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="http://unsquare.com/blog/web/" itemprop="url">
+        <span itemprop="title">Web</span>
+      </a>
+    </span>
+   
+  </nav><!-- /.breadcrumbs -->
+
+		<div class="page-title">
+			<h1>How to Turn Wordpress Into a Static Site Using AMPPS and Simply Static</h1>
+		</div>
+		<div class="inner-wrap">
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>After much tinkering, I <em>finally</em> figured out how to make a decent static backup of my <a href="http://old.unsquare.com">old Wordpress site</a>. I kept running into problems no matter my approach - whether I tried the web interface or <a href="https://en.wikipedia.org/wiki/Wget">wget</a> - but I had a brainstorm recently that solved a lot of my issues.</p>
+
+<p>The main problem with trying to create a backup in the Wordpress web interface is that my site is on <a href="https://wordpress.org/plugins/disable-feeds/">shared hosting</a> and Wordpress is a resource hog. It’s one of the reasons I wanted to switch to <a href="http://jekyllrb.com">Jekyll</a> in the first place. I’m unlikely to ever be able to afford dedicated hosting, so switching to a static site was definitely an economic choice.</p>
+
+<p>It’s also just a matter of impatience. If you try to do anything involved in Wordpress on shared hosting, you’ll probably hit the upper limit of your server’s memory and your site will crap out.</p>
+
+<p>That’s what happened every time I tried to generate a static copy of my site with a plugin called <a href="https://wordpress.org/plugins/simply-static/">Simply Static</a>. The plugin would load for a few long minutes and then return an error message.</p>
+
+<p>As for wget, it might just be too convoluted for my purposes. I could never quite figure out the right combination of options to download my site without also downloading a bunch of unnecessary garbage. It was also a pretty slow process. Whenever I inevitably realized halfway through that I’d included the wrong options, it meant I had to start over from the beginning.</p>
+
+<p>My brainstorm was when I realizes that I could use <a href="http://www.ampps.com">AMPPS</a> (or <a href="https://www.mamp.info/en/">MAMP</a>, if you prefer) to create my own dedicated server. See, I really only need the server for as long as it takes to spit out a static copy, so it would be absurd to pay for hosting.<!-- more --></p>
+
+<p>Here is the process that I used:</p>
+
+<ol>
+  <li>Download a copy of your Wordpress installation using an FTP program.</li>
+  <li>Log in to your site’s PHPMyAdmin and export a copy of your Wordpress MySQL database.</li>
+  <li>Install <a href="http://www.ampps.com">AMPPS</a> or <a href="https://www.mamp.info/en/">MAMP</a> on your local system. I used AMPSS, so I’ll provide instructions for that app, but MAMP has a lot of the same features.</li>
+  <li>Open AMPPS and go into the PHP settings, then select the PHP Extension option. Check the box next to <strong>zip.so</strong>, which is required to use the Simply Static Plugin. It won’t hurt if you also change your PHP version to 5.6.</li>
+  <li>Now, start Apache and MySQL in AMPPS.</li>
+  <li>Click the house icon in AMPPS to open the AMPPS dashboard, then go to <strong>Add Domain</strong> and create a record for your domain.
+    <ul>
+      <li>One of the nice things about AMPPS is that if you create a record for an existing domain, AMPPS can update your <a href="https://en.wikipedia.org/wiki/Hosts_(file)">hosts file</a> so that your browser loads the local copy instead of the live site. However, once you’re done with this process, you will need to remove the domain from AMPPS to reset your hosts file.</li>
+      <li>If you want to use a fake domain like <strong>your-site-url.dev</strong>, keep in mind that you will need to <a href="https://codex.wordpress.org/Changing_The_Site_URL">change the site url in your wp-config file</a> to make it work.</li>
+    </ul>
+  </li>
+  <li>Copy your Wordpress installation into the folder AMPPS created for your domain.</li>
+  <li>Return to AMPPS and open PHPMyAdmin. Create a new MySQL database, then use the <strong>Import</strong> option to upload the copy of your Wordpress database you downloaded.</li>
+  <li>Update your local wp-config file to reflect the AMPPS MySQL login information, which is available under <strong>MySQL Password</strong> in AMPPS. You’ll also need to use localhost as your MySQL server.</li>
+  <li>Open the domain you created in a web browser. If everything went to plan, you should be viewing a locally-running copy of your Wordpress site.</li>
+  <li>Log in to your local site’s Wordpress admin.</li>
+  <li>Deactivate all Wordpress plugins that don’t provide a required feature.</li>
+  <li>Remove the meta widget and/or any login links anywhere on your theme.</li>
+  <li>Install and activate a plugin that disables your RSS feeds. I found one called <a href="https://wordpress.org/plugins/disable-feeds/">Disable Feeds</a>.</li>
+  <li>Install and activate a plugin that generates a static copy of your site. There are a few different plugins available, but the one that worked best for me was <a href="https://wordpress.org/plugins/simply-static/">Simply Static</a>.</li>
+  <li>If you’re feeling super-diligent, go through all of your posts with a fine-toothed comb and find all of the broken video embeds from ten years ago, weird code that relies on long-forgotten plugins, etc. I’ve done this in fits and starts but I have a loooong way to go before all of those old posts are actually fixed.</li>
+  <li>Now, open the Simply Static settings and confirm that everything is configured correctly. If you’re moving your static site to a new domain, you can specify that in the settings.</li>
+  <li>Choose the Generate option, then sit back and wait. Once Simply Static is done, you’ll have the option of downloading a zipped copy of the static files.</li>
+  <li>Extract the zipped files and upload them wherever you want your static site to live.</li>
+  <li>Open your new static domain to confirm that everything is working properly. Once you’re sure the static site looks the way you want it, remove any local versions of your site from AMPPS and you’re good to go!</li>
+</ol>
+
+<p>Although I was able to create a copy of my site using this process, I’d still like to go through old posts and fix broken embeds and links before I say it’s completely done. That will probably take a while, just because I hate looking at my posts from so long ago.</p>
+
+
+				<hr />
+				<footer class="page-footer">
+					<div class="page-meta">
+	<p>
+	
+		
+			<i class="fa fa-clock-o"></i> <time datetime="2016-01-23T11:42:51Z" itemprop="datePublished">January 23, 2016</time>
+		
+	
+	
+		
+		
+		
+		
+		
+		
+
+		</br>
+		<i class="fa fa-folder-open"></i>&nbsp;
+		
+			<a href="http://unsquare.com/blog/" itemprop="url">
+		
+		blog
+		
+			</a>
+		
+		
+			&nbsp;<i class="fa fa-long-arrow-right"></i>&nbsp;
+			
+				<a href="http://unsquare.com/blog/web/" itemprop="url">
+			
+			web
+			
+				</a>
+			
+		
+	
+	
+		</br>
+		<i class="fa fa-tags"></i> Wordpress, Jekyll, AMPPS, MAMP, static site, shared hosting, and dedicated server
+	
+	</p>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		<div class="sidebar">
+			
+				
+
+<div class="author-content">
+	<div class="author-image">
+		<img src="//www.gravatar.com/avatar/b98fe2155fadbbe57eba7f0582115df7?s=135" alt="A photo of Jeff James" />
+	</div><!-- ./author-image -->
+	<h5 class="author-name"><span itemprop="author">Jeff James</span></h5>
+	<p class="author-bio">Reader, writer, grower of artisanal beards</p>
+</div><!-- ./author-content -->
+				<div class="inline-btn">
+	<a class="btn-social twitter" href="https://twitter.com/unsquare" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+	<a class="btn-social facebook" href="https://www.facebook.com/unsquare" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+	<a class="btn-social google-plus"  href="https://plus.google.com/+JeffJamesUnsquare" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+</div><!-- /.share-this -->
+			
+		</div><!-- /.sidebar -->
+	</article><!-- ./wrap -->
+</div><!-- /#main -->
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+			<li><a href="http://unsquare.com" ></a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2016 <a href="http://unsquare.com">Jeff James</a> powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> + <a href="http://mmistakes.github.io/skinny-bones-jekyll/" rel="nofollow">Skinny Bones</a>.</p>
+</footer>
+    </div>
+
+    <script src="http://unsquare.com/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="http://unsquare.com/js/main.js"></script>
+    <script>window.twttr = (function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0],
+		t = window.twttr || {};
+	  if (d.getElementById(id)) return t;
+	  js = d.createElement(s);
+	  js.id = id;
+	  js.src = "https://platform.twitter.com/widgets.js";
+	  fjs.parentNode.insertBefore(js, fjs);
+ 
+	  t._e = [];
+	  t.ready = function(f) {
+		t._e.push(f);
+	  };
+ 
+	  return t;
+	}(document, "script", "twitter-wjs"));</script>
+	<script>
+		$(document).ready(function() {
+			$(document.links).filter(function() {
+				return this.hostname != window.location.hostname;
+			}).attr('target', '_blank');			
+		});
+	</script>
+	<script>
+		if($(window).width() >= 800){
+			$(function() {
+
+				var $sidebar   = $("#sidebar"), 
+					$window    = $(window),
+					offset     = $sidebar.offset(),
+					topPadding = 15;
+
+				$window.scroll(function() {
+					if ($window.scrollTop() > offset.top) {
+						$sidebar.stop().animate({
+							marginTop: $window.scrollTop() - offset.top + topPadding
+						});
+					} else {
+						$sidebar.stop().animate({
+							marginTop: 0
+						});
+					}
+				});
+	
+			});
+		}
+	</script>
+	<script>
+		// Find all iframes
+		var $iframes = $( "iframe" );
+
+		// Resize the iframes when the window is resized
+		$( window ).resize( function () {
+		  $iframes.each( function() {
+			// Get the parent container&#x27;s width
+			var width = $( this ).parent().width();
+			$( this ).width( width )
+			  .height( width * $( this ).data( "ratio" ) );
+		  });
+		// Resize to fix all iframes on page load.
+		}).resize();
+	</script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-2382702-7', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+  </body>
+</html>

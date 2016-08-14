@@ -1,0 +1,14 @@
+---
+layout: archive
+title: "Blog"
+---
+
+<div id="main" role="main">
+{% for post in paginator.posts %}
+  {% include post-index.html %}
+{% endfor %}
+</div><!-- /#main -->
+
+<!-- pagination -->
+{% include pagination.html %}
+<!-- /pagination -->

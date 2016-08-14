@@ -1,0 +1,12 @@
+---
+layout: media
+title: {{ title }}
+modified:
+category: {{ dir }}
+excerpt:
+tags: []
+image:
+  feature:
+  teaser:
+ads: false  
+---

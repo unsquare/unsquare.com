@@ -1,0 +1,35 @@
+# Site navigation links
+#
+# Image Credits:
+# 
+# Mailbox by Joey Rozier:
+# https://flic.kr/p/4Fm8h
+#
+# Blog by GotCredit:
+# https://flic.kr/p/rCsjDm
+#
+# Writer's Block I by Drew Coffman:
+# https://flic.kr/p/8kvbSL
+#
+# Archives by Marino González:
+# https://flic.kr/p/9pCCAi
+
+- title: Blog
+  url: /blog/
+  excerpt: "Sometimes I turn my thoughts into words."
+  image: blog.jpg
+  
+- title: Writing
+  url: /writing/
+  excerpt: "Writing of all kinds."
+  image: writing.jpg
+  
+- title: Archive
+  url: /archive/
+  excerpt: "Everything I've posted here."
+  image: archive.jpg
+  
+- title: Contact
+  url: /contact/
+  excerpt: "Tell me what you have to say."
+  image: contact.jpg

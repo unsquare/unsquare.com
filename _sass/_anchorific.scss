@@ -1,0 +1,28 @@
+.anchorific {
+
+	ul {
+		list-style-type: none;
+		li a {
+			color: #238b90;
+			display: block;
+			font-weight: 700;
+			text-decoration: none;
+			padding: 5px;
+		}
+	}
+
+	li ul {
+		list-style-type: none;
+		display: none;
+	}
+
+	li.active {
+		> a {
+			background-color: #fff;
+		}
+
+		> ul {
+			display: block;
+		}
+	}
+}
